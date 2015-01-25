@@ -11,14 +11,14 @@
 
 makeCacheMatrix <- function(x = matrix()) {
       
-      invmat <- NULL
+      invmat <- NULL  ## Assigns NULL to variable that will store the inverse of matrix
       setmat <- function(y) {
-            x <<- y
+            x <<- y   
             invmat <<- NULL
       }
-      getmat <- function() x
-      setinvmat <- function(solve) invmat <<- solve
-      getinvmat <- function() invmat
+      getmat <- function() x  ## returns the matrix
+      setinvmat <- function(solve) invmat <<- solve ## calculates inverse of matrix and assigns to invmat
+      getinvmat <- function() invmat  ## returns the value of invmat
       list(setmat = setmat, getmat = getmat,
            setinvmat = setinvmat,
            getinvmat = getinvmat)
@@ -31,14 +31,14 @@ makeCacheMatrix <- function(x = matrix()) {
 ## else it computes by using Solve function and returns it.It also sets the inverse of matrix to cache for future use.
 cacheSolve <- function(x, ...) {
         
-      invmat <- x$getinvmat()
-      if(!is.null(invmat)) {
+      invmat <- x$getinvmat() 
+      if(!is.null(invmat)) { ## checks if invmat is blank
             message("getting inverse matrix from cache")
-            return(invmat)
+            return(invmat)  ## returns inverse of matrix from cache
       }
-      mat <- x$getmat()
-      invmat <- solve(mat, ...)
-      x$setinvmat(invmat)
+      mat <- x$getmat() ## assigns mat with input matrix
+      invmat <- solve(mat, ...)  ## calculates inverse of matrix
+      x$setinvmat(invmat) ## stores inverse of matrix to cache
       message("calculating inverse matrix")
       invmat
 }
